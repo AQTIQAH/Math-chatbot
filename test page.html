@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            padding: 20px;
+            margin: 20px auto;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+        h2 {
+            font-size: 28px;
+        }
+        p {
+            font-size: 22px;
+        }
+        label {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 5px;
+        } 
+        
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="quizForm">
+        
+        <h2>Integration by Parts:</h2>
+
+        <p>1. Evaluate the integral: ∫ x * ln(x) dx</p>
+        <input type="radio" name="integration_by_parts_question_1" value="Option1">
+        <label>Option 1: x² ln(x) / 2 - x² / 4 + C</label><br>
+        <input type="radio" name="integration_by_parts_question_1" value="Option2">
+        <label>Option 2: x ln(x) / 2 - x² + C</label><br>
+        <input type="radio" name="integration_by_parts_question_1" value="Option3">
+        <label>Option 3: x² ln(x) / 3 + C</label><br>
+
+        <p>2. Evaluate the integral: ∫ e<sup>x</sup> * sin(x) dx </p>
+        <input type="radio" name="integration_by_parts_question_2" value="Option1">
+        <label>Option 1: (e<sup>x</sup> / 2) * (sin(x) - cos(x)) + C</label><br>
+        <input type="radio" name="integration_by_parts_question_2" value="Option2">
+        <label>Option 2: (e<sup>x</sup> / 2) * (cos(x) + sin(x)) + C</label><br>
+        <input type="radio" name="integration_by_parts_question_2" value="Option3">
+        <label>Option 3: (e<sup>x</sup> / 2) * (cos(x) - sin(x)) + C</label><br>
+    
+
+        <h2>DI Method 1st General:</h2>
+
+        <p>3. Evaluate the integral: ∫ x * e<sup>x</sup> dx </p>
+        <input type="radio" name="di_method1_question_1" value="Option1">
+        <label>Option 1: (x - 1) * e<sup>x</sup> + C</label><br>
+        <input type="radio" name="di_method1_question_1" value="Option2">
+        <label>Option 2: (x + 1) * e<sup>x</sup> + C</label><br>
+        <input type="radio" name="di_method1_question_1" value="Option3">
+        <label>Option 3: x * e<sup>x</sup> - e<sup>x</sup> + C</label><br>
+
+        <p>4. Evaluate the integral: ∫ x² * e<sup>x</sup> dx </p>
+        <input type="radio" name="di_method1_question_2" value="Option1">
+        <label>Option 1: x² * e<sup>x</sup> - 2x * e<sup>x</sup> + 2e<sup>x</sup> + C</label><br> 
+        <input type="radio" name="di_method1_question_2" value="Option2">
+        <label>Option 2: x² * e<sup>x</sup> - e<sup>x</sup> + C</label><br>
+        <input type="radio" name="di_method1_question_2" value="Option3">
+        <label>Option 3: x² * e<sup>x</sup> + e<sup>x</sup> + C</label><br>
+
+
+        <h2>DI Method 2nd General:</h2>
+
+        <p>5. Evaluate the integral: ∫ x<sup>3</sup> * sin(-2x) dx</p>
+        <input type="radio" name="di_method3_question_3" value="Option1">
+        <label>Option 1: x<sup>3</sup> * cos(-2x) / 2 - 3x<sup>2</sup> * sin(-2x) / 4 + 6x * cos(-2x) / 8 + C</label><br>
+        <input type="radio" name="di_method3_question_3" value="Option2">
+        <label>Option 2: x<sup>3</sup> cos(2x) − (4/3) x<sup>2</sup> sin(2x) - (4/3) x cos(2x) - (8/3) sin(2x) + C</label><br>
+        <input type="radio" name="di_method3_question_3" value="Option3">
+        <label>Option 3: x<sup>3</sup> * sin(-2x) - 3x<sup>2</sup> * cos(-2x) + C</label><br>
+        
+        <p>6. Evaluate the integral: ∫ x<sup>2</sup> * sin(x) dx</p>
+        <input type="radio" name="di_method3_question_4" value="Option1">
+        <label>Option 1: -x<sup>2</sup> * cos(x) + 2x * sin(x) + 2 * cos(x) + C</label><br>
+        <input type="radio" name="di_method3_question_4" value="Option2">
+        <label>Option 2: x<sup>2</sup> * sin(x) - 2x * cos(x) + 2 * sin(x) + C</label><br>
+        <input type="radio" name="di_method3_question_4" value="Option3">
+        <label>Option 3: x<sup>2</sup> * sin(x) - x * cos(x) + C</label><br>
+        
+
+        <h2>DI Method 3rd General:</h2>
+
+        <p>7. Evaluate the integral: ∫ x * cos(x) dx </p>
+        <input type="radio" name="di_method2_question_1" value="Option1">
+        <label>Option 1: x * sin(x) + cos(x) + C</label><br>
+        <input type="radio" name="di_method2_question_1" value="Option2">
+        <label>Option 2: x * sin(x) - cos(x) + C</label><br>
+        <input type="radio" name="di_method2_question_1" value="Option3">
+        <label>Option 3: x * cos(x) - sin(x) + C</label><br>
+
+        <p>8. Evaluate the integral: ∫ x² * cos(x) dx </p>
+        <input type="radio" name="di_method2_question_2" value="Option1">
+        <label>Option 1: -x² * sin(x) + 2x * cos(x) - 2sin(x) + C</label><br>
+        <input type="radio" name="di_method2_question_2" value="Option2">
+        <label>Option 2: x² * sin(x) + 2x * cos(x) - 2sin(x) + C</label><br>
+        <input type="radio" name="di_method2_question_2" value="Option3">
+        <label>Option 3: x² * sin(x) - 2cos(x) + C</label><br>
+    
+
+        <h2>DD Method 1st General:</h2>
+
+        <p>9. Evaluate the integral: ∫ e<sup>x</sup> * cos(x) dx </p>
+        <input type="radio" name="dd_method1_question_1" value="Option1">
+        <label>Option 1: (e<sup>x</sup> / 2) * (cos(x) + sin(x)) + C</label><br> 
+        <input type="radio" name="dd_method1_question_1" value="Option2">
+        <label>Option 2: (e<sup>x</sup> / 2) * (cos(x) - sin(x)) + C</label><br>
+        <input type="radio" name="dd_method1_question_1" value="Option3">
+        <label>Option 3: e<sup>x</sup> * cos(x) + C</label><br>
+
+        <p>10. Evaluate the integral: ∫ e<sup>-2x</sup> * cos(2x) dx </p>
+        <input type="radio" name="dd_method1_question_2" value="Option1">
+        <label>Option 1: e<sup>-2x</sup> * (cos(2x) + sin(2x)) + C</label><br>
+        <input type="radio" name="dd_method1_question_2" value="Option2">
+        <label>Option 2: (e<sup>-2x</sup> / 2) * (cos(-2x) - sin(-2x)) + C</label><br>
+        <input type="radio" name="dd_method1_question_2" value="Option3">
+        <label>Option 3: (1/4) e<sup>-2x</sup> * (sin(2x) - cos(2x)) + C </label><br> 
+    
+
+        <h2>DD Method 2nd General:</h2>
+
+        <p>11. Evaluate the integral: ∫ e<sup>x</sup> * sin(x) dx </p>
+        <input type="radio" name="dd_method2_question_1" value="Option1">
+        <label>Option 1: (e<sup>x</sup> / 2) * (cos(x) + sin(x)) + C</label><br>
+        <input type="radio" name="dd_method2_question_1" value="Option2"> 
+        <label>Option 2: (e<sup>x</sup> / 2) * (sin(x) - cos(x)) + C</label><br> 
+        <input type="radio" name="dd_method2_question_1" value="Option3">
+        <label>Option 3: e<sup>x</sup> * sin(x) + C</label><br>
+
+        <p>12. Evaluate the integral: ∫ e<sup>-2x</sup> * sin(3x) dx</p>
+        <input type="radio" name="dd_method2_question_2" value="Option1">
+        <label>Option 1: (e<sup>-2x</sup> / 13) * (3cos(-3x) - 2sin(-3x)) + C</label><br>
+        <input type="radio" name="dd_method2_question_2" value="Option2">
+        <label>Option 2: (e<sup>-2x</sup> / 13) * (2sin(3x) + 3cos(3x)) + C</label><br>
+        <input type="radio" name="dd_method2_question_2" value="Option3">
+        <label>Option 3: (e<sup>-2x</sup> / 13) * (3cos(3x) - 2sin(3x)) + C</label><br>  
+
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <script>
+        const correctAnswers = {
+            'integration_by_parts_question_1': { correctAnswer: 'Option1', questionText: 'Evaluate the integral: ∫ x * ln(x) dx' },
+            'integration_by_parts_question_2': { correctAnswer: 'Option1', questionText: 'Evaluate the integral: ∫ e^x * sin(x) dx' },
+            'di_method1_question_1': { correctAnswer: 'Option3', questionText: 'Evaluate the integral: ∫ x * e^x dx' },
+            'di_method1_question_2': { correctAnswer: 'Option1', questionText: 'Evaluate the integral: ∫ x² * e^x dx' },
+            'di_method3_question_3': { correctAnswer: 'Option2', questionText: 'Evaluate the integral: ∫ x^3 * sin(-2x) dx' },
+            'di_method3_question_4': { correctAnswer: 'Option1', questionText: 'Evaluate the integral: ∫ x² * sin(x) dx' },
+            'di_method2_question_1': { correctAnswer: 'Option1', questionText: 'Evaluate the integral: ∫ x * cos(x) dx' },
+            'di_method2_question_2': { correctAnswer: 'Option2', questionText: 'Evaluate the integral: ∫ x² * cos(x) dx' },
+            'dd_method1_question_1': { correctAnswer: 'Option1', questionText: 'Evaluate the integral: ∫ e^x * cos(x) dx' },
+            'dd_method1_question_2': { correctAnswer: 'Option3', questionText: 'Evaluate the integral: ∫ e^-2x * cos(2x) dx' },
+            'dd_method2_question_1': { correctAnswer: 'Option2', questionText: 'Evaluate the integral: ∫ e^x * sin(x) dx' },
+            'dd_method2_question_2': { correctAnswer: 'Option3', questionText: 'Evaluate the integral: ∫ e^-2x * sin(3x) dx' }
+        };
+    
+        document.getElementById('quizForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            let score = 0;
+            let detailedResults = [];
+    
+            for (const [question, data] of Object.entries(correctAnswers)) {
+                const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+                const userAnswer = selectedOption ? selectedOption.value : null;
+                const isCorrect = userAnswer === data.correctAnswer;
+    
+                if (isCorrect) {
+                    score++;
+                }
+    
+                detailedResults.push({
+                    questionText: data.questionText,
+                    userAnswer: userAnswer || 'No answer selected',
+                    correctAnswer: data.correctAnswer,
+                    isCorrect: isCorrect
+                });
+            }
+    
+            const resultsData = encodeURIComponent(JSON.stringify(detailedResults));
+            window.location.href = `results page.html?score=${score}&total_questions=${Object.keys(correctAnswers).length}&results=${resultsData}`;
+        });
+    </script>    
+</body>
+</html>

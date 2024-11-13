@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Query Bot</title>
+    <style>
+        /* Basic styling for the chatbot */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #chat-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .chat-bubble {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .bot-response {
+            background-color: #f0f0f0;
+            color: #333;
+            align-self: flex-start;
+        }
+
+        .chat-bubble.bot-response::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 10px;
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent #f0f0f0 transparent transparent;
+        }
+
+        #chat-box {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .message {
+            margin: 10px 0;
+            display: flex;
+        }
+
+        .user-message {
+            justify-content: flex-end;
+        }
+
+        .bot-message {
+            justify-content: flex-start;
+        }
+
+        .message p {
+            max-width: 60%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .user-message p {
+            background-color: #bc61f5;
+            color: white;
+            text-align: right;
+        }
+
+        .bot-message p {
+            background-color: #f1f0f0;
+            color: black;
+        }
+
+        .input-container {
+            display: flex;
+        }
+
+        #query {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        #submit-btn {
+            padding: 10px 20px;
+            background-color: #a020f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        #submit-btn:hover {
+            background-color: #9417e2;
+        }
+
+        #solution-image {
+            max-width: 400px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        /* Adding a link style for YouTube tutorial videos */
+        a.youtube-link {
+            color: #ff0000;
+            text-decoration: none;
+        }
+
+        a.youtube-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <!-- Example bot response with a link -->
+        <div class="chat-bubble bot-response">
+            Link here to start the test: <a href="file:///C:/FYP%20Semester%202%20ChatGPT%20Project%202024/chatbot_with%20API-20231227T030416Z-001_1/chatbot_with%20API/Second%20Protoge/Chatbot/Python/templates/front%20page.html" target="_blank">Start Test</a>
+        </div>
+    </div>
+
+    <!-- Input field for user questions -->
+    <div id="input-container">
+        <input type="text" id="user-input" placeholder="Ask a math question...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            const query = document.getElementById('query').value;
+            handleUserInput(query);
+        });
+    
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                const query = document.getElementById('query').value;
+                handleUserInput(query);
+            }
+        }
+    
+        function handleUserInput(query) {
+            if (query.trim() === "") return;
+    
+            // Display user message
+            displayMessage(query, 'user-message');
+    
+            // Clear input field
+            document.getElementById('query').value = '';
+    
+            // Send the query to the server
+            fetch('/ask', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: query })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display bot response or any additional content
+                if (data.response) displayMessage(data.response, 'bot-message');
+                if (data.videoLink) displayVideoLink(data.videoLink);
+                if (data.imageLink) displaySolutionImage(data.imageLink);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    
+        function displayMessage(text, className) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${className}`;
+            const messageContent = document.createElement('p');
+            messageContent.textContent = text;
+            messageDiv.appendChild(messageContent);
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    
+        function displaySolutionImage(image_solution) {
+            const chatBox = document.getElementById('chat-box');
+
+            //Create a new div for the solution message
+            const solutionDiv = document.createElement('div');
+            solutionDiv.className = 'bot-message message';
+
+            //Create the solution image and append it to the div 
+            const imageElement = document.createElement('img');
+            imageElement.src = imageLink;
+            imageElement.alt = "Solution Image"; 
+            imageElement.style.maxWidth = '400px'; 
+            imageElement.style.borderRadius = '5px';
+            
+            //Append the image to the solution div
+            solutionDiv.appendChild(imageElement);
+            chatBox.appendChild(solutionDiv);
+
+            //Scroll to the latest message 
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    
+        function displayVideoLink(response) {
+            const chatBox = document.getElementById('chat-box');
+            const videoDiv = document.createElement('div');
+            videoDiv.className = 'bot-message message';
+
+            // Extract the URL from the response
+            const videoLink = response;  // Assuming the backend returns the URL as 'response'
+
+            // Create the <a> tag for the clickable link
+            const linkElement = document.createElement('a');
+            linkElement.href = videoLink;   // Set the URL
+            linkElement.target = "_blank";  // Open in a new tab
+            linkElement.className = 'youtube-link';
+            linkElement.textContent = "Watch this tutorial video";  // Link text
+
+            // Append the link to the message div and the message to the chat box
+            videoDiv.appendChild(linkElement);
+            chatBox.appendChild(videoDiv);
+
+            // Ensure the chat box scrolls to the bottom
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function displayBotResponse(responseText) {
+            const chatContainer = document.getElementById("chat-container");
+            const botBubble = document.createElement("div");
+            botBubble.className = "chat-bubble bot-response";
+            botBubble.innerHTML = responseText; // Make sure responseText includes HTML for links, if needed
+            chatContainer.appendChild(botBubble);
+        }
+
+
+    </script>
+</body>
+</html>

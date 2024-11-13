@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results</title>
+</head>
+<body>
+    <h1>Your Test Result</h1>
+    <p id="resultText"></p>
+    <div id="detailedResults"></div>
+    <button onclick="window.location.href='front page.html'">Go Back to Home</button>
+
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            const score = params.get('score');
+            const totalQuestions = params.get('total_questions');
+            const resultsData = params.get('results');
+
+            let detailedResults = [];
+            if (resultsData) {
+                try {
+                    detailedResults = JSON.parse(decodeURIComponent(resultsData));
+                } catch (error) {
+                    console.error("Failed to parse results data:", error);
+                }
+            }
+
+            return { score, totalQuestions, detailedResults };
+        }
+
+        const { score, totalQuestions, detailedResults } = getQueryParams();
+
+        if (score === null || totalQuestions === null) {
+            document.getElementById('resultText').textContent = `Error: Test results not available.`;
+        } else {
+            document.getElementById('resultText').textContent = `You answered ${score} out of ${totalQuestions} correctly.`;
+        }
+
+        if (detailedResults.length > 0) {
+            const resultsContainer = document.getElementById('detailedResults');
+            detailedResults.forEach((result, index) => {
+                const questionResult = document.createElement('div');
+                questionResult.style.marginBottom = '15px';
+                questionResult.innerHTML = `
+                    <h3>Question ${index + 1}: ${result.questionText}</h3>
+                    <p><strong>Status:</strong> <span style="color: ${result.isCorrect ? 'green' : 'red'};">${result.isCorrect ? 'Correct' : 'Incorrect'}</span></p>
+                    <p><strong>Your Answer:</strong> ${result.userAnswer || 'No answer selected'}</p>
+                    <p><strong>Correct Answer:</strong> ${result.correctAnswer}</p>
+                `;
+                resultsContainer.appendChild(questionResult);
+            });
+        } else {
+            document.getElementById('detailedResults').textContent = "No detailed question data available.";
+        }
+    </script>
+</body>
+</html>
+
